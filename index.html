@@ -1,13 +1,96 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio-gw</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio Frontend Developer" />
+  <title>Portfolio Fitra</title>
+</head>
+<body class="d-flex flex-column justify-content-between p-4 p-md-5">
+
+  <!-- HEADER: Menggunakan Grid 3 Kolom agar Navbar presisi di tengah -->
+  <header class="container-fluid px-0">
+    <div class="row align-items-center gy-3">
+
+      <!-- Kolom 1: Logo di Kiri -->
+      <div class="col-12 col-md-4 text-center text-md-start">
+        <a href="#" class="text-decoration-none text-dark fw-bold fs-4 tracking-tight" aria-label="Beranda">
+          Locafit <span class="text-raindance" aria-hidden="true">✳</span>
+        </a>
+      </div>
+
+      <!-- Kolom 2: Pill Navbar tepat di Tengah -->
+      <div class="col-12 col-md-4 d-flex justify-content-center">
+        <nav class="nav nav-pill-container" aria-label="Navigasi Utama">
+          <a class="nav-link active" aria-current="page" href="#work">Work</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="d-flex ">
+
+        </div>
+      </div>
+
+      <!-- Kolom 3: Penyeimbang Kosong di Kanan (Hanya tampil di Desktop) -->
+      <div class="col-md-4 d-none d-md-block" aria-hidden="true"></div>
+
+    </div>
+  </header>
+
+  <!-- MAIN HERO SECTION -->
+  <main class="container-fluid px-0 my-auto py-5">
+    <div class="row align-items-center gy-5">
+      <div class="col-12 col-lg-7">
+
+        <!-- Baris Pertama dengan Ikon Melayang di atas nama (seperti gambar referensi) -->
+        <div class="position-relative d-inline-block mt-3">
+          <div class="floating-doodles" aria-hidden="true">
+            <i class="bi bi-compass doodle-1"></i>
+            <i class="bi bi-cursor-fill doodle-2"></i>
+            <i class="bi bi-pencil-fill doodle-3"></i>
+          </div>
+
+          <h2 class="hero-heading mb-0">
+            Hi, I'm Fitra
+          </h2>
+        </div>
+
+        <!-- Baris Kalimat Utama -->
+        <p class="hero-heading mb-0">
+          I'm a <span class="text-raindance">Junior Frontend Developer</span><br />
+          Who Builds For Impact At<br />
+          Startups.
+        </p>
+
+      </div>
+      <div class="col-12 col-lg-12 text-center text-lg-end">
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER INFO & PANAH SCROLL -->
+  <footer class="container-fluid px-0 d-flex justify-content-between align-items-end">
+
+    <!-- Info Status dengan Font Monospace -->
+    <div class="font-monospace small text-secondary">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <!-- Bagian ini nanti akan diisi beberapa kode untuk landing page -->
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-geo-alt-fill text-raindance" aria-hidden="true"></i>
+        <span>Based in Indonesia</span>
+      </div>
+    </div>
+
+    <!-- Panah Bawah di Pojok Kanan -->
+    <a href="#work" class="scroll-arrow text-decoration-none" aria-label="Scroll ke daftar proyek">
+      <i class="bi bi-arrow-down" aria-hidden="true"></i>
+    </a>
+
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+</body>
 </html>

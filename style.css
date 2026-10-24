@@ -1,0 +1,92 @@
+/* style.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  /* Palet Warna 60-30-10 */
+  --bg-offwhite: #F2F2EF;       /* 60% - Dominan Background */
+  --raindance: #91A39E;         /* 30% - Benjamin Moore Raindance */
+  --raindance-subtle: rgba(145, 163, 158, 0.28); /* Raindance transparan untuk wadah navbar */
+  --raindance-dark: #5E716C;    /* Raindance versi lebih gelap agar teks/ikon memenuhi standar kontras A11y */
+  --charcoal: #1C1C1C;          /* 10% - Aksen Teks Utama */
+}
+
+body {
+  background-color: var(--bg-offwhite);
+  color: var(--charcoal);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Navbar Pill Styling (Menggunakan 30% Raindance) */
+.nav-pill-container {
+  background-color: var(--raindance-subtle);
+  border-radius: 50rem;
+  padding: 0.35rem;
+}
+
+.nav-pill-container .nav-link {
+  color: #4A5552;
+  border-radius: 50rem;
+  padding: 0.5rem 1.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+/* Tab Aktif kembali ke warna 60% Off-White */
+.nav-pill-container .nav-link.active {
+  background-color: var(--bg-offwhite);
+  color: var(--charcoal);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nav-pill-container .nav-link:hover:not(.active) {
+  color: var(--charcoal);
+}
+
+/* Tipografi Hero Utama (10% Charcoal) */
+.hero-heading {
+  /* Ukuran font dinamis menyesuaikan layar dari HP hingga Monitor Besar */
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--charcoal);
+}
+
+/* Dekorasi Ikon Melayang di atas kata "Hey, I'm..." */
+.floating-doodles {
+  position: absolute;
+  top: -2.4rem;
+  left: 36%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1.1rem;
+  font-size: 1.85rem;
+  pointer-events: none;
+}
+
+.doodle-1 { color: var(--raindance-dark); transform: rotate(-15deg); }
+.doodle-2 { color: var(--raindance); transform: rotate(10deg) translateY(-6px); }
+.doodle-3 { color: var(--charcoal); transform: rotate(20deg); }
+
+/* Warna Aksen Raindance untuk Ikon & Sorotan */
+.text-raindance {
+  color: var(--raindance-dark);
+}
+
+/* Indikator Scroll Panah Kanan Bawah */
+.scroll-arrow {
+  font-size: 2.75rem;
+  color: var(--raindance-dark);
+  transition: transform 0.3s ease, color 0.3s ease;
+  line-height: 1;
+}
+
+.scroll-arrow:hover {
+  transform: translateY(6px);
+  color: var(--charcoal);
+}
