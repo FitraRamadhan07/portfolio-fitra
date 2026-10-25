@@ -3,11 +3,11 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 :root {
-  /* Palet Warna 60-30-10 */
+  /* Palet Warna 60-30-10 (Dipertegas agar Raindance tidak terlihat abu-abu) */
   --bg-offwhite: #F2F2EF;       /* 60% - Dominan Background */
-  --raindance: #91A39E;         /* 30% - Benjamin Moore Raindance */
-  --raindance-subtle: rgba(145, 163, 158, 0.28); /* Raindance transparan untuk wadah navbar */
-  --raindance-dark: #5E716C;    /* Raindance versi lebih gelap agar teks/ikon memenuhi standar kontras A11y */
+  --raindance: #689F90;         /* 30% - Benjamin Moore Raindance (Hijau-sage lebih hidup) */
+  --raindance-subtle: rgba(104, 159, 144, 0.28); /* Raindance transparan untuk wadah navbar */
+  --raindance-dark: #3B6E61;    /* Raindance versi lebih gelap & tegas untuk ikon/kontras A11y */
   --charcoal: #1C1C1C;          /* 10% - Aksen Teks Utama */
 }
 
@@ -78,7 +78,7 @@ body {
   color: var(--raindance-dark);
 }
 
-/* Indikator Scroll Panah Kanan Bawah */
+/* Indikator Scroll Panah Dasar */
 .scroll-arrow {
   font-size: 2.75rem;
   color: var(--raindance-dark);
@@ -89,4 +89,397 @@ body {
 .scroll-arrow:hover {
   transform: translateY(6px);
   color: var(--charcoal);
+}
+
+/* =========================================================
+   LANJUTAN CSS: ANIMASI SLIDE NAVBAR & KOMPONEN HALAMAN LAIN
+   ========================================================= */
+
+/* 1. Pengaturan Posisi untuk Animasi Slide Navbar */
+.nav-pill-container {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Kapsul putih yang bergeser mengikuti menu aktif */
+.nav-glider {
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 0;
+  background-color: var(--bg-offwhite);
+  border-radius: 50rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1;
+}
+
+.nav-pill-container .nav-link {
+  position: relative;
+  z-index: 2; /* Memastikan teks selalu berada di atas glider */
+}
+
+/* Mematikan background statis bawaan karena sudah digantikan oleh .nav-glider */
+.nav-pill-container .nav-link.active {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* 2. Animasi Pergantian Konten Halaman */
+.page-section {
+  animation: fadeSlideIn 0.35s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. Komponen Pendukung Halaman About & Contact */
+.content-box-raindance {
+  background-color: var(--raindance-subtle);
+  border: 1px solid var(--raindance);
+  border-radius: 1.5rem;
+}
+
+.skill-pill {
+  background-color: var(--bg-offwhite);
+  color: var(--charcoal);
+  border: 1px solid var(--raindance-dark);
+  border-radius: 50rem;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.input-raindance {
+  background-color: var(--bg-offwhite);
+  border: 1.5px solid var(--raindance);
+  border-radius: 0.85rem;
+  padding: 0.75rem 1rem;
+  color: var(--charcoal);
+}
+
+.input-raindance:focus {
+  background-color: #ffffff;
+  border-color: var(--raindance-dark);
+  box-shadow: 0 0 0 0.2rem var(--raindance-subtle);
+}
+
+.btn-action-charcoal {
+  background-color: var(--charcoal);
+  color: var(--bg-offwhite);
+  border-radius: 50rem;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-action-charcoal:hover {
+  background-color: var(--raindance-dark);
+  color: var(--bg-offwhite);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   LANJUTAN CSS: FULL-SCREEN VERTICAL SCROLLING & UI TOKENS
+   ========================================================= */
+
+/* Smooth scroll & offset untuk sticky navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+/* Sticky Header Navigation (Bersih & menyatu ke canvas, tanpa bingkai/barrier luar) */
+.sticky-nav-header {
+  position: sticky;
+  top: 1.25rem;
+  z-index: 1030;
+  background: transparent;
+  padding: 0.5rem 0;
+}
+
+/* Tombol Contact Me di Navbar Kanan */
+.btn-contact-nav {
+  background-color: var(--charcoal);
+  color: var(--bg-offwhite);
+  border-radius: 50rem;
+  padding: 0.55rem 1.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  border: none;
+}
+
+.btn-contact-nav:hover {
+  background-color: var(--raindance-dark);
+  color: var(--bg-offwhite);
+  transform: translateY(-2px);
+}
+
+/* Responsivitas Navbar Pill untuk Mobile / Tablet */
+.nav-pill-container {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.nav-pill-container::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+@media (max-width: 767.98px) {
+  .nav-pill-container .nav-link {
+    padding: 0.4rem 0.95rem;
+    font-size: 0.85rem;
+  }
+  .floating-doodles {
+    left: 45%;
+    top: -2.1rem;
+    font-size: 1.4rem;
+    gap: 0.8rem;
+  }
+}
+
+/* Spasi & Tipografi Antar-Seksi (Generous Whitespace) */
+.section-padding {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+.section-badge {
+  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+}
+
+.section-heading {
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--charcoal);
+}
+
+/* Hero Section Layout (Vertically Centered Screen) */
+.hero-min-screen {
+  min-height: calc(100vh - 6.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Hero Photo Frame & Container */
+.hero-photo-container {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .hero-photo-container {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+.hero-photo-frame {
+  position: relative;
+  border-radius: 2rem;
+  border: 2px solid var(--raindance);
+  background-color: var(--raindance-subtle);
+  padding: 0.75rem;
+  box-shadow: 0 16px 36px rgba(59, 110, 97, 0.14);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-photo-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(59, 110, 97, 0.2);
+}
+
+.hero-photo-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 1.4rem;
+  background-color: var(--bg-offwhite);
+  display: block;
+}
+
+.hero-photo-badge {
+  position: absolute;
+  bottom: -0.75rem;
+  right: 1.25rem;
+  background-color: var(--bg-offwhite);
+  border: 1px solid var(--raindance-dark);
+  color: var(--charcoal);
+  padding: 0.35rem 0.95rem;
+  border-radius: 50rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Centered Scroll Indicator (Hero Bottom Bar) */
+.hero-scroll-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.scroll-hint-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--raindance-dark);
+  font-family: var(--bs-font-monospace);
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.scroll-arrow-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--raindance-dark);
+  background-color: var(--bg-offwhite);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--raindance-dark);
+  transition: all 0.25s ease;
+  animation: bounceArrow 2s infinite ease-in-out;
+}
+
+.hero-scroll-wrapper:hover .scroll-arrow-circle {
+  background-color: var(--raindance-dark);
+  color: var(--bg-offwhite);
+  transform: translateY(2px);
+  animation-play-state: paused;
+}
+
+.hero-scroll-wrapper:hover .scroll-hint-text {
+  color: var(--charcoal);
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Project Cards & Previews (Ukuran Proporsional & Elegan) */
+.project-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.25rem;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 110, 97, 0.12);
+}
+
+.project-preview {
+  border-radius: 0.85rem;
+  border: 1px solid var(--raindance);
+  overflow: hidden;
+  background-color: var(--bg-offwhite);
+  aspect-ratio: 16 / 9;
+  max-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-preview img,
+.project-preview svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.project-description {
+  font-size: 0.935rem;
+  line-height: 1.55;
+  color: #4A5552;
+}
+
+.project-card .skill-pill {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+/* Minimalist Divided List (Experience & Education) */
+.divided-list-item {
+  border-bottom: 1px solid rgba(104, 159, 144, 0.4);
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.divided-list-item:first-child {
+  border-top: 1px solid rgba(104, 159, 144, 0.4);
+}
+
+.divided-list-item:hover {
+  background-color: rgba(104, 159, 144, 0.08);
+}
+
+/* Social & Link Pills */
+.social-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 50rem;
+  border: 1px solid var(--raindance-dark);
+  color: var(--charcoal);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: var(--bg-offwhite);
+  transition: all 0.2s ease;
+}
+
+.social-pill-link:hover {
+  background-color: var(--raindance-dark);
+  color: var(--bg-offwhite);
+  transform: translateY(-2px);
+}
+
+/* Footer Minimalis */
+.site-footer {
+  border-top: 1px solid rgba(104, 159, 144, 0.35);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
