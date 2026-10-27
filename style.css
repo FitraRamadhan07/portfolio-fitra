@@ -24,15 +24,25 @@ body {
   background-color: var(--raindance-subtle);
   border-radius: 50rem;
   padding: 0.35rem;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .nav-pill-container .nav-link {
   color: #4A5552;
   border-radius: 50rem;
-  padding: 0.5rem 1.75rem;
+  padding: 0.45rem 1.45rem;
   font-weight: 500;
   font-size: 0.95rem;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
   transition: all 0.25s ease;
+  position: relative;
+  z-index: 2;
 }
 
 /* Tab Aktif kembali ke warna 60% Off-White */
@@ -49,19 +59,18 @@ body {
 
 /* Tipografi Hero Utama (10% Charcoal) */
 .hero-heading {
-  /* Ukuran font dinamis menyesuaikan layar dari HP hingga Monitor Besar */
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 3.8vw, 3.35rem);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.035em;
   color: var(--charcoal);
 }
 
-/* Dekorasi Ikon Melayang di atas kata "Hey, I'm..." */
+/* Dekorasi Ikon Melayang di atas kata "Hi, I'm..." */
 .floating-doodles {
   position: absolute;
   top: -2.4rem;
-  left: 36%;
+  left: 24%;
   transform: translateX(-50%);
   display: flex;
   gap: 1.1rem;
@@ -95,12 +104,6 @@ body {
    LANJUTAN CSS: ANIMASI SLIDE NAVBAR & KOMPONEN HALAMAN LAIN
    ========================================================= */
 
-/* 1. Pengaturan Posisi untuk Animasi Slide Navbar */
-.nav-pill-container {
-  position: relative;
-  display: inline-flex;
-}
-
 /* Kapsul putih yang bergeser mengikuti menu aktif */
 .nav-glider {
   position: absolute;
@@ -114,18 +117,13 @@ body {
   z-index: 1;
 }
 
-.nav-pill-container .nav-link {
-  position: relative;
-  z-index: 2; /* Memastikan teks selalu berada di atas glider */
-}
-
 /* Mematikan background statis bawaan karena sudah digantikan oleh .nav-glider */
 .nav-pill-container .nav-link.active {
   background-color: transparent;
   box-shadow: none;
 }
 
-/* 2. Animasi Pergantian Konten Halaman */
+/* Animasi Pergantian Konten Halaman */
 .page-section {
   animation: fadeSlideIn 0.35s ease-out;
 }
@@ -141,7 +139,7 @@ body {
   }
 }
 
-/* 3. Komponen Pendukung Halaman About & Contact */
+/* Komponen Pendukung Halaman About, Journey & Contact */
 .content-box-raindance {
   background-color: var(--raindance-subtle);
   border: 1px solid var(--raindance);
@@ -156,6 +154,15 @@ body {
   padding: 0.45rem 1.1rem;
   font-size: 0.875rem;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.skill-pill:hover {
+  background-color: var(--raindance-dark);
+  color: var(--bg-offwhite);
+  transform: translateY(-1px);
 }
 
 .input-raindance {
@@ -179,13 +186,17 @@ body {
   padding: 0.75rem 2rem;
   font-weight: 600;
   border: none;
-  transition: background-color 0.25s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-action-charcoal:hover {
   background-color: var(--raindance-dark);
   color: var(--bg-offwhite);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 110, 97, 0.25);
 }
 
 /* =========================================================
@@ -207,19 +218,23 @@ html {
   padding: 0.5rem 0;
 }
 
-/* Tombol Contact Me di Navbar Kanan */
+/* Tombol Contact Me di Navbar Kanan (Disamakan ukurannya dengan .nav-pill-container) */
 .btn-contact-nav {
   background-color: var(--charcoal);
   color: var(--bg-offwhite);
   border-radius: 50rem;
-  padding: 0.55rem 1.4rem;
+  height: 50px;
+  padding: 0 1.6rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  transition: background-color 0.25s ease, transform 0.2s ease;
+  justify-content: center;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
   border: none;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .btn-contact-nav:hover {
@@ -233,21 +248,29 @@ html {
   max-width: 100%;
   overflow-x: auto;
   white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .nav-pill-container::-webkit-scrollbar {
-  display: none; /* WebKit */
+  display: none;
 }
 
 @media (max-width: 767.98px) {
+  .nav-pill-container {
+    height: 44px;
+  }
   .nav-pill-container .nav-link {
-    padding: 0.4rem 0.95rem;
+    padding: 0.35rem 0.95rem;
+    font-size: 0.85rem;
+  }
+  .btn-contact-nav {
+    height: 44px;
+    padding: 0 1.2rem;
     font-size: 0.85rem;
   }
   .floating-doodles {
-    left: 45%;
+    left: 28%;
     top: -2.1rem;
     font-size: 1.4rem;
     gap: 0.8rem;
@@ -261,14 +284,14 @@ html {
 }
 
 .section-badge {
-  letter-spacing: 0.12em;
-  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  font-size: 0.84rem;
 }
 
 .section-heading {
-  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.15;
   letter-spacing: -0.035em;
   color: var(--charcoal);
 }
@@ -332,9 +355,15 @@ html {
   font-size: 0.78rem;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
 }
 
-/* Centered Scroll Indicator (Hero Bottom Bar) */
+/* Centered Scroll Indicator (Hero Bottom Bar - Dinaikkan Sesuai Permintaan) */
+.hero-bottom-bar {
+  margin-top: auto;
+  padding-bottom: 3.5rem;
+}
+
 .hero-scroll-wrapper {
   display: inline-flex;
   flex-direction: column;
@@ -342,6 +371,7 @@ html {
   gap: 0.45rem;
   text-decoration: none;
   cursor: pointer;
+  margin-bottom: 1.25rem;
 }
 
 .scroll-hint-text {
@@ -389,27 +419,90 @@ html {
   }
 }
 
-/* Project Cards & Previews (Ukuran Proporsional & Elegan) */
+/* Journey Section & Two-Column Grid Styling (Tengah & Rapi) */
+.journey-item {
+  border-bottom: 1px solid rgba(104, 159, 144, 0.35);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.journey-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.journey-bullet-list {
+  padding-left: 1.15rem;
+  margin-bottom: 0;
+}
+
+.journey-bullet-list li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #4A5552;
+  margin-bottom: 0.4rem;
+}
+
+.journey-bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Certifications Badges Box */
+.cert-badge-box {
+  background-color: var(--bg-offwhite);
+  border: 1.5px solid var(--raindance);
+  border-radius: 1.1rem;
+  padding: 1.15rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cert-badge-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--raindance-dark);
+  box-shadow: 0 6px 16px rgba(59, 110, 97, 0.12);
+}
+
+.cert-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--raindance-subtle);
+  color: var(--raindance-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+/* Project Cards & Previews (Ukuran Lebih Besar & 2 Card Proporsional) */
 .project-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(59, 110, 97, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(59, 110, 97, 0.18);
 }
 
 .project-preview {
-  border-radius: 0.85rem;
+  border-radius: 1.15rem;
   border: 1px solid var(--raindance);
   overflow: hidden;
   background-color: var(--bg-offwhite);
-  aspect-ratio: 16 / 9;
-  max-height: 200px;
+  aspect-ratio: 16 / 10;
+  max-height: 230px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -423,14 +516,14 @@ html {
 }
 
 .project-title {
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-size: 1.25rem;
   letter-spacing: -0.025em;
-  line-height: 1.25;
+  line-height: 1.28;
 }
 
 .project-description {
-  font-size: 0.935rem;
-  line-height: 1.55;
+  font-size: 0.925rem;
+  line-height: 1.58;
   color: #4A5552;
 }
 
@@ -439,33 +532,17 @@ html {
   font-size: 0.8rem;
 }
 
-/* Minimalist Divided List (Experience & Education) */
-.divided-list-item {
-  border-bottom: 1px solid rgba(104, 159, 144, 0.4);
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
-  transition: background-color 0.2s ease;
-}
-
-.divided-list-item:first-child {
-  border-top: 1px solid rgba(104, 159, 144, 0.4);
-}
-
-.divided-list-item:hover {
-  background-color: rgba(104, 159, 144, 0.08);
-}
-
-/* Social & Link Pills */
+/* Social & Link Pills (Teks Panjang Dirampingkan agar Rapi) */
 .social-pill-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.25rem;
+  gap: 0.65rem;
+  padding: 0.65rem 1.35rem;
   border-radius: 50rem;
   border: 1px solid var(--raindance-dark);
   color: var(--charcoal);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 500;
   background-color: var(--bg-offwhite);
   transition: all 0.2s ease;
@@ -475,6 +552,7 @@ html {
   background-color: var(--raindance-dark);
   color: var(--bg-offwhite);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 110, 97, 0.2);
 }
 
 /* Footer Minimalis */
