@@ -349,21 +349,285 @@ html {
   display: none;
 }
 
+/* =========================================================
+   RESPONSIVE DESIGN: MOBILE & TABLET ADAPTATION
+   (Mempertahankan estetika desktop, mengoptimalkan tata letak & proporsi di mobile)
+   ========================================================= */
+
 @media (max-width: 767.98px) {
+  /* 1. Header & Floating Pill Navbar di Mobile */
   .sticky-nav-header {
-    top: 0.65rem;
+    top: 0.45rem;
+    padding: 0.2rem 0.5rem;
   }
+
+  .sticky-nav-header .row {
+    row-gap: 0.35rem !important;
+  }
+
+  #brand-logo {
+    font-size: 1.15rem !important;
+    display: inline-block;
+  }
+
   .nav-pill-container {
-    height: 44px;
+    height: 40px;
+    padding: 0.22rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   }
+
   .nav-pill-container .nav-link {
-    padding: 0.35rem 0.95rem;
+    padding: 0.25rem 0.62rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .nav-glider {
+    top: 0.22rem;
+    bottom: 0.22rem;
+  }
+
+  /* 2. Spasi Antar Halaman & Section Padding di Mobile */
+  .section-padding {
+    padding-top: 4.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .section-badge {
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+  }
+
+  .section-heading {
+    font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+    letter-spacing: -0.025em;
+  }
+
+  /* 3. Hero Section di Mobile */
+  .hero-min-screen {
+    padding-top: 4.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-heading {
+    font-size: clamp(1.65rem, 6.8vw, 2.3rem);
+    line-height: 1.18;
+  }
+
+  .hero-subheading {
+    font-size: clamp(1.1rem, 4.4vw, 1.4rem);
+    line-height: 1.32;
+  }
+
+  #work p.text-secondary {
+    font-size: 0.95rem !important;
+    line-height: 1.58 !important;
+    margin-top: 0.85rem !important;
+  }
+
+  .btn-action-charcoal {
+    padding: 0.65rem 1.35rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-photo-container {
+    max-width: 230px;
+    margin-top: 1.5rem;
+  }
+
+  .hero-photo-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    bottom: -0.6rem;
+    right: 0.75rem;
+  }
+
+  .hero-bottom-bar {
+    padding-top: 1.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .scroll-arrow-circle {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .scroll-hint-text {
+    font-size: 0.68rem;
+  }
+
+  /* 4. About Section di Mobile */
+  #about p.text-secondary {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .about-photo-card {
+    max-width: 240px;
+    margin-top: 1.25rem;
+    padding: 0.65rem;
+  }
+
+  .about-photo-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    bottom: -0.6rem;
+    right: 0.75rem;
+  }
+
+  /* 5. Journey Section di Mobile */
+  .education-timeline-card {
+    padding: 1.15rem 1.25rem;
+    border-radius: 1.15rem;
+  }
+
+  .education-timeline-title {
+    font-size: 1.05rem;
+  }
+
+  .education-timeline-subtitle {
     font-size: 0.85rem;
   }
-  .btn-contact-nav {
-    height: 44px;
-    padding: 0 1.2rem;
-    font-size: 0.85rem;
+
+  .education-timeline-badge {
+    font-size: 0.74rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .education-timeline-desc {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .experience-card-horizontal {
+    border-radius: 1.2rem;
+  }
+
+  .experience-card-img-wrap {
+    height: 155px;
+  }
+
+  .experience-card-body {
+    padding: 1.15rem;
+  }
+
+  .experience-bullet-list li {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* 6. Skills Section di Mobile */
+  #skills .content-box-raindance {
+    padding: 1.25rem !important;
+    border-radius: 1.25rem;
+  }
+
+  .skill-pill {
+    padding: 0.35rem 0.82rem;
+    font-size: 0.8rem;
+  }
+
+  .cert-badge-box {
+    padding: 0.85rem 1rem;
+    gap: 0.85rem;
+    border-radius: 1rem;
+  }
+
+  .cert-icon-circle {
+    width: 42px;
+    height: 42px;
+    font-size: 1.15rem;
+  }
+
+  /* 7. Projects Section di Mobile */
+  .project-card {
+    padding: 1.25rem !important;
+    border-radius: 1.25rem;
+  }
+
+  .project-preview {
+    max-height: 190px;
+    border-radius: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+  }
+
+  .project-description {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* Tombol View Source Code di card project dibuat rapi & ramah sentuhan */
+  .project-card .btn-action-charcoal {
+    width: 100%;
+    justify-content: center;
+    min-height: 42px;
+  }
+
+  /* 8. Contact Section & Form di Mobile */
+  #contact h3.hero-heading {
+    font-size: 1.6rem;
+    line-height: 1.25;
+  }
+
+  #contact p.text-secondary {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .social-pill-link {
+    width: 100%;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.84rem;
+    word-break: break-all;
+  }
+
+  #contact-form {
+    padding: 1.25rem !important;
+    border-radius: 1.25rem;
+  }
+
+  .input-raindance {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  /* 9. Footer di Mobile */
+  .site-footer {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+
+  .footer-copy-text,
+  .footer-brand-pill {
+    font-size: 0.8rem;
+  }
+}
+
+/* Penyesuaian Ekstra untuk Layar Ponsel Sangat Ramping (<= 400px) */
+@media (max-width: 400px) {
+  .nav-pill-container .nav-link {
+    padding: 0.22rem 0.5rem;
+    font-size: 0.74rem;
+  }
+
+  .social-pill-link {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.85rem;
+  }
+
+  .hero-photo-container {
+    max-width: 200px;
+  }
+
+  .about-photo-card {
+    max-width: 210px;
   }
 }
 
