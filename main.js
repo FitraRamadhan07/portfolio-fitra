@@ -75,7 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(manualScrollTimeout);
 
         setActiveNavLink(targetId, true);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Scroll presisi ke paling atas seksi target agar pas 1 halaman tanpa memotong seksi sebelumnya
+        const targetTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
 
         manualScrollTimeout = setTimeout(() => {
           isManualScrolling = false;
@@ -135,6 +141,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       alert(`Terima kasih, ${senderName}! Pesan Anda telah terkirim. Fitra akan segera merespons melalui email.`);
       contactForm.reset();
+    });
+  }
+
+  // 7. Lightbox Preview: HANYA untuk Gambar di Professional Experience dan Halaman Projects
+  const lightboxModalEl = document.getElementById('imageLightboxModal');
+  const modalImg = document.getElementById('modalLightboxImage');
+  const modalCaption = document.getElementById('modalLightboxCaption');
+
+  if (lightboxModalEl && modalImg) {
+    const bsModal = new bootstrap.Modal(lightboxModalEl);
+
+    // Ambil elemen pembungkus gambar HANYA pada .experience-card-img-wrap dan .project-preview
+    const viewableContainers = document.querySelectorAll('.experience-card-img-wrap, .project-preview');
+
+    viewableContainers.forEach((container) => {
+      container.addEventListener('click', () => {
+        const img = container.querySelector('img');
+        if (img && img.src) {
+          modalImg.src = img.src;
+          modalImg.alt = img.alt || 'Preview Gambar';
+          if (modalCaption) {
+            modalCaption.textContent = img.alt || '';
+          }
+          bsModal.show();
+        }
+      });
     });
   }
 });

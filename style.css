@@ -4,19 +4,21 @@
 
 :root {
   /* Palet Warna 60-30-10 (Dipertegas agar Raindance tidak terlihat abu-abu) */
-  --bg-offwhite: #F2F2EF;       /* 60% - Dominan Background */
+  --bg-offwhite: #F2F2EF;       /* 60% - Dominan Background Utama */
+  --bg-raindance-muted: #E2E8E5; /* Nuansa abu-abu kehijauan lembut raindance untuk seksi bergantian */
   --raindance: #689F90;         /* 30% - Benjamin Moore Raindance (Hijau-sage lebih hidup) */
   --raindance-subtle: rgba(104, 159, 144, 0.28); /* Raindance transparan untuk wadah navbar */
   --raindance-dark: #3B6E61;    /* Raindance versi lebih gelap & tegas untuk ikon/kontras A11y */
   --charcoal: #1C1C1C;          /* 10% - Aksen Teks Utama */
 }
 
+html,
 body {
   background-color: var(--bg-offwhite);
   color: var(--charcoal);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Navbar Pill Styling (Menggunakan 30% Raindance) */
@@ -29,6 +31,9 @@ body {
   align-items: center;
   box-sizing: border-box;
   position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .nav-pill-container .nav-link {
@@ -63,6 +68,15 @@ body {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.035em;
+  color: var(--charcoal);
+}
+
+/* Sub-heading Hero (h2): Berada di antara h1 (clamp 2rem-3.35rem) dan p fs-5 (1.25rem) */
+.hero-subheading {
+  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
   color: var(--charcoal);
 }
 
@@ -139,11 +153,83 @@ body {
   }
 }
 
-/* Komponen Pendukung Halaman About, Journey & Contact */
+/* Komponen Pendukung Halaman About, Journey & Contact (Card dengan Shadow Elegan) */
 .content-box-raindance {
   background-color: var(--raindance-subtle);
   border: 1px solid var(--raindance);
   border-radius: 1.5rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(59, 110, 97, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content-box-raindance:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(59, 110, 97, 0.12);
+}
+
+/* Card Frame Foto About Me (Solid Raindance Color #689F90) */
+.about-photo-card {
+  position: relative;
+  background-color: var(--raindance);
+  border: 2px solid var(--raindance-dark);
+  border-radius: 2rem;
+  padding: 0.85rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(59, 110, 97, 0.18);
+  max-width: 285px;
+  width: 100%;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .about-photo-card {
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 992px) {
+  .about-photo-card {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+.about-photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(59, 110, 97, 0.3);
+}
+
+.about-photo-frame {
+  position: relative;
+  border-radius: 1.4rem;
+  overflow: hidden;
+  background-color: var(--bg-offwhite);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.about-photo-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 1.35rem;
+}
+
+.about-photo-badge {
+  position: absolute;
+  bottom: -0.75rem;
+  right: 1.25rem;
+  background-color: var(--bg-offwhite);
+  border: 1px solid var(--raindance-dark);
+  color: var(--charcoal);
+  padding: 0.35rem 0.95rem;
+  border-radius: 50rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
 }
 
 .skill-pill {
@@ -203,19 +289,26 @@ body {
    LANJUTAN CSS: FULL-SCREEN VERTICAL SCROLLING & UI TOKENS
    ========================================================= */
 
-/* Smooth scroll & offset untuk sticky navbar */
+/* Smooth scroll (Offset 0 agar halaman target mulai persis di paling atas layar tanpa terpotong) */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
+  scroll-padding-top: 0;
 }
 
-/* Sticky Header Navigation (Bersih & menyatu ke canvas, tanpa bingkai/barrier luar) */
+/* Sticky Header Navigation (Selalu mengikuti scroll user di seluruh halaman) */
 .sticky-nav-header {
   position: sticky;
-  top: 1.25rem;
-  z-index: 1030;
+  top: 1rem;
+  z-index: 1040;
   background: transparent;
-  padding: 0.5rem 0;
+  padding: 0.35rem 1rem;
+  pointer-events: none;
+}
+
+.sticky-nav-header a,
+.sticky-nav-header nav,
+.sticky-nav-header button {
+  pointer-events: auto;
 }
 
 /* Tombol Contact Me di Navbar Kanan (Disamakan ukurannya dengan .nav-pill-container) */
@@ -257,6 +350,9 @@ html {
 }
 
 @media (max-width: 767.98px) {
+  .sticky-nav-header {
+    top: 0.65rem;
+  }
   .nav-pill-container {
     height: 44px;
   }
@@ -268,12 +364,6 @@ html {
     height: 44px;
     padding: 0 1.2rem;
     font-size: 0.85rem;
-  }
-  .floating-doodles {
-    left: 28%;
-    top: -2.1rem;
-    font-size: 1.4rem;
-    gap: 0.8rem;
   }
 }
 
@@ -296,24 +386,47 @@ html {
   color: var(--charcoal);
 }
 
-/* Hero Section Layout (Vertically Centered Screen) */
+/* Hero Section Layout (Vertically Centered Screen & Turun Proporsional) */
 .hero-min-screen {
-  min-height: calc(100vh - 6.5rem);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-top: 4.5rem;
+  padding-bottom: 0.75rem;
 }
 
-/* Hero Photo Frame & Container */
+@media (min-width: 768px) {
+  .hero-min-screen {
+    padding-top: 6.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-min-screen {
+    padding-top: 7.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/* Hero Photo Frame & Container (Responsif Mobile & Desktop) */
 .hero-photo-container {
   position: relative;
-  max-width: 320px;
+  max-width: 275px;
   width: 100%;
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .hero-photo-container {
+    max-width: 300px;
+  }
+}
+
 @media (min-width: 992px) {
   .hero-photo-container {
+    max-width: 330px;
     margin-left: auto;
     margin-right: 0;
   }
@@ -336,8 +449,9 @@ html {
 
 .hero-photo-img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: center top;
   border-radius: 1.4rem;
   background-color: var(--bg-offwhite);
   display: block;
@@ -358,10 +472,11 @@ html {
   white-space: nowrap;
 }
 
-/* Centered Scroll Indicator (Hero Bottom Bar - Dinaikkan Sesuai Permintaan) */
+/* Centered Scroll Indicator (Hero Bottom Bar - Diturunkan Santai) */
 .hero-bottom-bar {
   margin-top: auto;
-  padding-bottom: 3.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.25rem;
 }
 
 .hero-scroll-wrapper {
@@ -371,7 +486,7 @@ html {
   gap: 0.45rem;
   text-decoration: none;
   cursor: pointer;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .scroll-hint-text {
@@ -419,32 +534,233 @@ html {
   }
 }
 
-/* Journey Section & Two-Column Grid Styling (Tengah & Rapi) */
-.journey-item {
-  border-bottom: 1px solid rgba(104, 159, 144, 0.35);
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
+/* =========================================================
+   JOURNEY SECTION: EDUCATION (ROW) & PROFESSIONAL EXPERIENCE (3 HORIZONTAL CARDS)
+   ========================================================= */
+
+/* Education Vertical Timeline (Sesuai Referensi Desain) */
+.education-timeline {
+  position: relative;
+  padding-left: 2.75rem;
 }
 
-.journey-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.education-timeline::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 11px;
+  width: 2px;
+  background-color: var(--raindance-dark);
+  opacity: 0.45;
+}
+
+.education-timeline-item {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+
+.education-timeline-item:last-child {
   margin-bottom: 0;
 }
 
-.journey-bullet-list {
+.education-timeline-marker {
+  position: absolute;
+  left: -2.75rem;
+  top: 1.25rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--bg-offwhite);
+  border: 3px solid var(--raindance-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--bg-offwhite);
+}
+
+.education-marker-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--raindance-dark);
+}
+
+.education-timeline-card {
+  background-color: var(--raindance-subtle);
+  border: 1px solid var(--raindance);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(59, 110, 97, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.education-timeline-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.11), 0 4px 12px rgba(59, 110, 97, 0.1);
+}
+
+.education-timeline-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+}
+
+.education-timeline-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--raindance-dark);
+}
+
+.education-timeline-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #4A5552;
+}
+
+.education-timeline-badge {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0.5rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.education-timeline-badge.status-ongoing {
+  background-color: rgba(59, 110, 97, 0.16);
+  color: var(--raindance-dark);
+  border: 1px solid var(--raindance-dark);
+}
+
+.education-timeline-badge.status-completed {
+  background-color: rgba(28, 28, 28, 0.08);
+  color: var(--charcoal);
+  border: 1px solid rgba(28, 28, 28, 0.2);
+}
+
+@media (max-width: 575.98px) {
+  .education-timeline {
+    padding-left: 2rem;
+  }
+  .education-timeline::before {
+    left: 9px;
+    top: 1.15rem;
+    bottom: 1.15rem;
+  }
+  .education-timeline-marker {
+    left: -2rem;
+    width: 20px;
+    height: 20px;
+    top: 1.15rem;
+    border-width: 2.5px;
+  }
+  .education-marker-dot {
+    width: 6px;
+    height: 6px;
+  }
+  .education-timeline-card {
+    padding: 1.15rem 1.25rem;
+  }
+  .education-timeline-title {
+    font-size: 1.1rem;
+  }
+  .education-timeline-subtitle {
+    font-size: 0.88rem;
+  }
+}
+
+/* Professional Experience Horizontal Cards */
+.experience-card-horizontal {
+  background-color: var(--raindance-subtle);
+  border: 1px solid var(--raindance);
+  border-radius: 1.35rem;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(59, 110, 97, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.experience-card-horizontal:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(59, 110, 97, 0.12);
+}
+
+.experience-card-img-wrap {
+  width: 100%;
+  height: 165px;
+  overflow: hidden;
+  background-color: var(--bg-offwhite);
+  border-bottom: 1px solid var(--raindance);
+  position: relative;
+  cursor: pointer;
+}
+
+.experience-card-img-wrap::after,
+.project-preview::after {
+  content: '🔍 Klik untuk perbesar';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.65rem;
+  background-color: rgba(28, 28, 28, 0.75);
+  color: #F2F2EF;
+  font-size: 0.72rem;
+  font-family: var(--bs-font-monospace);
+  padding: 0.22rem 0.6rem;
+  border-radius: 50rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.experience-card-img-wrap:hover::after,
+.project-preview:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.experience-card-horizontal:hover .experience-card-img {
+  transform: scale(1.04);
+}
+
+.experience-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.experience-bullet-list {
   padding-left: 1.15rem;
   margin-bottom: 0;
 }
 
-.journey-bullet-list li {
-  font-size: 0.9rem;
-  line-height: 1.55;
+.experience-bullet-list li {
+  font-size: 0.84rem;
+  line-height: 1.5;
   color: #4A5552;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
-.journey-bullet-list li:last-child {
+.experience-bullet-list li:last-child {
   margin-bottom: 0;
 }
 
@@ -457,13 +773,14 @@ html {
   display: flex;
   align-items: center;
   gap: 1.1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(59, 110, 97, 0.06);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cert-badge-box:hover {
   transform: translateY(-2px);
   border-color: var(--raindance-dark);
-  box-shadow: 0 6px 16px rgba(59, 110, 97, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1), 0 3px 8px rgba(59, 110, 97, 0.1);
 }
 
 .cert-icon-circle {
@@ -489,14 +806,16 @@ html {
   max-width: 520px;
   width: 100%;
   margin: 0 auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(59, 110, 97, 0.08);
 }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(59, 110, 97, 0.18);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.13), 0 4px 14px rgba(59, 110, 97, 0.12);
 }
 
 .project-preview {
+  position: relative;
   border-radius: 1.15rem;
   border: 1px solid var(--raindance);
   overflow: hidden;
@@ -506,6 +825,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .project-preview img,
@@ -513,6 +833,8 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
 .project-title {
@@ -555,9 +877,139 @@ html {
   box-shadow: 0 4px 12px rgba(59, 110, 97, 0.2);
 }
 
-/* Footer Minimalis */
+/* =========================================================
+   FOOTER WARNA RAINDANCE ELEGAN & AMBIENT
+   ========================================================= */
 .site-footer {
+  background: linear-gradient(180deg, rgba(104, 159, 144, 0.22) 0%, rgba(59, 110, 97, 0.35) 100%);
+  border-top: 1.5px solid var(--raindance);
+  padding-top: 2.75rem;
+  padding-bottom: 2.75rem;
+  border-radius: 2rem 2rem 0 0;
+  box-shadow: 0 -8px 24px rgba(59, 110, 97, 0.08);
+}
+
+.site-footer-inner {
+  color: var(--charcoal);
+}
+
+.footer-copy-text {
+  color: #2F3E3A;
+  font-size: 0.88rem;
+}
+
+.footer-brand-pill {
+  color: #2F3E3A;
+  font-size: 0.88rem;
+}
+
+.text-raindance-accent {
+  color: var(--raindance-dark);
+  font-weight: 700;
+}
+
+/* =========================================================
+   FULL-WIDTH BACKGROUND BERGANTIAN SETIAP HALAMAN (SESUAI REFERENSI GAMBAR)
+   About & Projects: Background Utama (Off-White #F2F2EF)
+   Journey & Skills & Contact: Background Full Abu-abu Raindance Muted (#E2E8E5)
+   ========================================================= */
+#work {
+  background-color: var(--bg-offwhite);
+  width: 100%;
+  min-height: 100vh;
+}
+
+#about {
+  background-color: var(--bg-offwhite);
+  width: 100%;
+  border-top: 1px solid rgba(104, 159, 144, 0.2);
+}
+
+/* Journey dipertahankan multi-screen alami karena kontennya panjang (Education timeline + 3 Experience cards) */
+#journey {
+  background-color: var(--bg-raindance-muted);
+  width: 100%;
   border-top: 1px solid rgba(104, 159, 144, 0.35);
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(104, 159, 144, 0.35);
+  min-height: auto;
+  display: block;
+}
+
+#skills {
+  background-color: var(--bg-offwhite);
+  width: 100%;
+  border-bottom: 1px solid rgba(104, 159, 144, 0.2);
+}
+
+#projects {
+  background-color: var(--bg-raindance-muted);
+  width: 100%;
+  border-top: 1px solid rgba(104, 159, 144, 0.35);
+  border-bottom: 1px solid rgba(104, 159, 144, 0.35);
+}
+
+#contact {
+  background-color: var(--bg-offwhite);
+  width: 100%;
+}
+
+/* Full-Screen 1 Halaman Rapi untuk Semua Seksi Kecuali Journey */
+@media (min-width: 992px) {
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 992px) and (max-height: 720px) {
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   LIGHTBOX MODAL VIEWER UNTUK GAMBAR PROFESSIONAL EXP & PROJECT
+   ========================================================= */
+.image-preview-modal .modal-content {
+  background-color: transparent;
+}
+
+.image-preview-modal .modal-backdrop {
+  background-color: rgba(18, 30, 26, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-preview-img {
+  max-height: 82vh;
+  object-fit: contain;
+  border: 2px solid var(--raindance);
+  background-color: #121e1a;
+}
+
+.custom-modal-close {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  padding: 0.65rem;
+  opacity: 0.95;
+  transition: all 0.2s ease;
+}
+
+.custom-modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
